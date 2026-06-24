@@ -16,7 +16,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/ai", aiRouter);
 
 // IMPORTANT FIX
-const frontendPath = path.join(process.cwd(), "client", "dist");
+const frontendPath = path.join(process.cwd(), "..", "client", "dist");
 
 app.use(express.static(frontendPath));
 
