@@ -22,7 +22,7 @@ const Home = () => {
 
           const res = await axios.get(`/api/v1/auth/me`, {
             headers : {
-              authorization : localStorage.getItem('token')
+              authorization : localStorage.getItem('authorization')
             }
           })
           
