@@ -12,19 +12,20 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const __dirname = path.resolve();
 
-
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/ai', aiRouter);
 
 // Serve frontend
 app.use(express.static(path.join(__dirname, "client", "dist")));
 
 // Catch all frontend routes
-app.get("*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
 
-app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/ai', aiRouter);
+
 
 const PORT = process.env.PORT || 8000;
 
