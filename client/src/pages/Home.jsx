@@ -22,7 +22,7 @@ const Home = () => {
 
           const res = await axios.get(`/api/v1/auth/me`, {
             headers : {
-              authorization : localStorage.getItem('authorization')
+              authorization : localStorage.getItem('authorization').replace("Bearer ", "")
             }
           })
           
@@ -43,11 +43,11 @@ const Home = () => {
 
   return (
     <>
-      <Navbar status={active} />
-      <Hero status={active} />
+      <Navbar active={active} />
+      <Hero active={active} />
       <Features />
       <HowItWorks />
-      <CTA status={active}/>
+      <CTA active={active}/>
       <Footer />
     </>
   );
