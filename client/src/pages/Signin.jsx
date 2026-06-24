@@ -15,7 +15,7 @@ export function Signin() {
   const mutation = useMutation({
     mutationFn: async (userData) => {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URI}/auth/signin`,
+        `/api/v1/auth/signin`,
         userData
       );
 

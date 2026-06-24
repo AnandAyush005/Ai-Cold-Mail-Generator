@@ -18,7 +18,7 @@ export function VerifyOtp() {
   const verifyMutation = useMutation({
     mutationFn: async (data) => {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URI}/auth/verify-otp`,
+        `/api/v1/auth/verify-otp`,
         data
       );
       return response.data;

@@ -17,7 +17,7 @@ export function Signup() {
   const mutation = useMutation({
     mutationFn: async (userData) => {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URI}/auth/signup`,
+        `/api/v1/auth/signup`,
         userData
       );
 

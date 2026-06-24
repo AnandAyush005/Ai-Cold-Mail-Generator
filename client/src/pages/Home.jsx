@@ -20,7 +20,7 @@ const Home = () => {
       async function isActive(){
         try {
 
-          const res = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/auth/me`, {
+          const res = await axios.get(`/api/v1/auth/me`, {
             headers : {
               authorization : localStorage.getItem('token')
             }

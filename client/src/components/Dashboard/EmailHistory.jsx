@@ -10,7 +10,7 @@ export function EmailHistory() {
       const token = localStorage.getItem("authorization").replace("Bearer ","");
 
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URI}/ai/get-history`,
+        `/api/v1/ai/get-history`,
         {
           headers: {
             authorization: token,
