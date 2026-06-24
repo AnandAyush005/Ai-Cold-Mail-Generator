@@ -12,8 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// API routes first
-app.use("/api/v1", yourRoutes);
+
+
 
 // Serve frontend
 app.use(express.static(path.join(__dirname, "client", "dist")));
