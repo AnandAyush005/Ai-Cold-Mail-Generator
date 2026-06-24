@@ -12,9 +12,16 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const __dirname = path.resolve();
+// API routes first
+app.use("/api/v1", yourRoutes);
 
-app.use(express.static(path.join(__dirname, "client/dist")));
+// Serve frontend
+app.use(express.static(path.join(__dirname, "client", "dist")));
+
+// Catch all frontend routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/ai', aiRouter);
