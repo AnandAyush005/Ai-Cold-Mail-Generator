@@ -1,0 +1,14 @@
+{
+  "name": "cold-mail-generator-ai-integrated",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter server start\" \"pnpm --filter client dev\"",
+    "build": "pnpm --filter client build",
+    "start": "pnpm --filter server start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
