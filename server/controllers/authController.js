@@ -190,11 +190,12 @@ async function resendOtp(req,res) {
     
 }
 
-async function profile(req,res) {
-
-    return res.status(200);
+async function profile(req, res) {
+  return res.status(200).json({
+    success: true,
+    message: "User authenticated"
+  });
 }
-
 async function generateToken(id) {
 
     const token = await jwt.sign({ id : id }, process.env.JWT_SECRET, {expiresIn : "24h"});
