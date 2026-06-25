@@ -30,6 +30,8 @@ async function sendEmail(options) {
     }
     catch(e){
 
+        console.log(e);
+
         
     }
 }

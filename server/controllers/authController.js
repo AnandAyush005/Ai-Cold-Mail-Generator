@@ -24,6 +24,12 @@ async function signupController(req,res){
             })
         }
 
+        const createUser = await User.create({
+            name : data.name,
+            password : data.password,
+            email : data.email
+        })
+
 
         res.status(200).json({
             message : "User is signed up"
@@ -36,6 +42,8 @@ async function signupController(req,res){
         res.status(500).json({
             message : "Internal server issue"
         })
+
+        console.log(error);
     }
 
 }
@@ -163,12 +171,20 @@ async function resendOtp(req,res) {
         try {
             
             await sendEmail({
-                to : data.email,
+                to : email,
                 subject : "Your OTP code for AL COLD MAIL GENERATOR",
                 text : `Your otp is ${otp}. It is valid for only 10 minutes`
             })
 
         } catch (error) {
+
+            console.log(error)
+
+            return res.status(511).json({
+                message : "Error while sending  otp"
+            })
+
+            
             
         }
         
