@@ -40,7 +40,7 @@ export function VerifyOtp() {
   const resendMutation = useMutation({
     mutationFn: async (email) => {
       const response = await axios.post(
-        `${process.env.BACKEND_URI}/auth/resend-otp`,
+        `/api/v1/auth/resend-otp`,
         { email }
       );
 
