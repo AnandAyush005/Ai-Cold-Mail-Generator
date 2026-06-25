@@ -1,33 +1,33 @@
-    import nodemailer from "nodemailer";
+import nodemailer from "nodemailer";
 
-    async function sendEmail(options) {
-        if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-            throw new Error("Email credentials are not set");
-        }
+const transporter = nodemailer.createTransport({
+    host: "smtp-relay.brevo.com",
+    port: 587,
+    secure: false,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000
+});
 
+await transporter.verify();
+console.log("SMTP ready");
 
+async function sendEmail(options) {
+    const mailOptions = {
+        from: '"Support" <anandayushcse@gmail.com>',
+        to: options.to,
+        subject: options.subject,
+        text: options.text,
+        html: `<p>${options.text}</p>`
+    };
 
-        const transporter = nodemailer.createTransport({
-            host: "smtp-relay.brevo.com",
-            port: 587,
-            secure: false,
-            auth: {
-                user: process.env.EMAIL_USER, // Brevo login
-                pass: process.env.EMAIL_PASS  // Brevo SMTP key
-            }
-        });
+    const info = await transporter.sendMail(mailOptions);
+    console.log(info);
+    return info;
+}
 
-        const mailOptions = {
-            from: '"Support" <anandayushcse@gmail.com>',
-            to: options.to,
-            subject: options.subject,
-            text: options.text,
-            html: `<p>${options.text}</p>`
-        };
-
-        const info = await transporter.sendMail(mailOptions);
-        
-        return info;
-    }
-
-    export { sendEmail };
+export { sendEmail };
