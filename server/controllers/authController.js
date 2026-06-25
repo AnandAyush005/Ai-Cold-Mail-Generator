@@ -49,7 +49,7 @@ async function signupController(req,res){
             message : "Internal server issue"
         })
 
-        console.log(error);
+        
     }
 
 }
@@ -145,9 +145,9 @@ async function resendOtp(req,res) {
 
     try {
 
-        console.log("1. Request received");
+        
         const email = req.body.email;
-        console.log("2. email extracted");
+        
 
         if(!email){
             return res.status(411).json({
@@ -155,9 +155,9 @@ async function resendOtp(req,res) {
             })
         }
 
-        console.log("3. finding user")
+        
         const findUser = await User.findOne({email});
-        console.log("4. get the user")
+        
 
         if(!findUser){
             return res.status(404).json({
@@ -177,23 +177,23 @@ async function resendOtp(req,res) {
         findUser.otp = otp;
         findUser.otpExpiry = otpExpiry;
 
-        console.log("Saving the user");
+        
         await findUser.save();
-        console.log("User is saved");
+        
 
         try {
             
-            console.log("sending email");
+            
             await sendEmail({
                 to : email,
                 subject : "Your OTP code for AL COLD MAIL GENERATOR",
                 text : `Your otp is ${otp}. It is valid for only 10 minutes`
             })
-            console.log("Email is sended");
+            
 
         } catch (error) {
 
-            console.log(error)
+            
 
             return res.status(511).json({
                 message : "Error while sending  otp"
@@ -211,7 +211,7 @@ async function resendOtp(req,res) {
 
     } catch (error) {
 
-        console.log(error)
+        
 
         res.status(500).json({
             message : "Error while generating the otp"
