@@ -176,11 +176,13 @@ async function resendOtp(req,res) {
 
         try {
             
+            console.log("sending email");
             await sendEmail({
                 to : email,
                 subject : "Your OTP code for AL COLD MAIL GENERATOR",
                 text : `Your otp is ${otp}. It is valid for only 10 minutes`
             })
+            console.log("Email is sended");
 
         } catch (error) {
 
