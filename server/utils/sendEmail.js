@@ -13,21 +13,24 @@ const transporter = nodemailer.createTransport({
     socketTimeout: 10000
 });
 
-await transporter.verify();
-console.log("SMTP ready");
-
 async function sendEmail(options) {
-    const mailOptions = {
-        from: '"Support" <anandayushcse@gmail.com>',
-        to: options.to,
-        subject: options.subject,
-        text: options.text,
-        html: `<p>${options.text}</p>`
-    };
+    try {
+        const mailOptions = {
+            from: '"Support" <anandayushcse@gmail.com>',
+            to: options.to,
+            subject: options.subject,
+            text: options.text,
+            html: `<p>${options.text}</p>`
+        };
 
-    const info = await transporter.sendMail(mailOptions);
-    console.log(info);
-    return info;
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Mail sent:", info.messageId);
+
+        return info;
+    } catch (error) {
+        console.log("Email sending failed:", error);
+        throw error;
+    }
 }
 
 export { sendEmail };
