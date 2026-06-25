@@ -145,7 +145,9 @@ async function resendOtp(req,res) {
 
     try {
 
+        console.log("1. Request received");
         const email = req.body.email;
+        console.log("2. email extracted");
 
         if(!email){
             return res.status(411).json({
@@ -153,7 +155,9 @@ async function resendOtp(req,res) {
             })
         }
 
+        console.log("3. finding user")
         const findUser = await User.findOne({email});
+        console.log("4. get the user")
 
         if(!findUser){
             return res.status(404).json({
@@ -172,7 +176,10 @@ async function resendOtp(req,res) {
 
         findUser.otp = otp;
         findUser.otpExpiry = otpExpiry;
+
+        console.log("Saving the user");
         await findUser.save();
+        console.log("User is saved");
 
         try {
             
