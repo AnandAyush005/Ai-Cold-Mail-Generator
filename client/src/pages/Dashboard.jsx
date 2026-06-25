@@ -6,39 +6,42 @@ export function Dashboard() {
   const [activeTab, setActiveTab] = useState("form");
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
       
-      {/* Sidebar */}
-      <div className="w-64 bg-white shadow-lg p-6 flex flex-col">
-        <h1 className="text-2xl font-bold mb-8 text-blue-600">
+      {/* Sidebar / Topbar */}
+      <div className="w-full md:w-64 bg-white shadow-lg p-4 md:p-6 flex md:flex-col flex-row justify-between md:justify-start">
+        
+        <h1 className="text-xl md:text-2xl font-bold text-blue-600 mb-0 md:mb-8">
           ColdAI
         </h1>
 
-        <button
-          onClick={() => setActiveTab("form")}
-          className={`text-left px-4 cursor-pointer py-3 rounded-lg mb-3 transition ${
-            activeTab === "form"
-              ? "bg-blue-600 text-white"
-              : "hover:bg-gray-100"
-          }`}
-        >
-          Generate Email
-        </button>
+        <div className="flex md:flex-col gap-2 md:w-full">
+          <button
+            onClick={() => setActiveTab("form")}
+            className={`px-3 md:px-4 py-2 md:py-3 rounded-lg cursor-pointer transition text-sm md:text-base ${
+              activeTab === "form"
+                ? "bg-blue-600 text-white"
+                : "hover:bg-gray-100"
+            }`}
+          >
+            Generate
+          </button>
 
-        <button
-          onClick={() => setActiveTab("history")}
-          className={`text-left px-4 py-3 cursor-pointer rounded-lg transition ${
-            activeTab === "history"
-              ? "bg-blue-600 text-white"
-              : "hover:bg-gray-100"
-          }`}
-        >
-          Email History
-        </button>
+          <button
+            onClick={() => setActiveTab("history")}
+            className={`px-3 md:px-4 py-2 md:py-3 rounded-lg cursor-pointer transition text-sm md:text-base ${
+              activeTab === "history"
+                ? "bg-blue-600 text-white"
+                : "hover:bg-gray-100"
+            }`}
+          >
+            History
+          </button>
+        </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8">
+      <div className="flex-1 p-4 md:p-8 overflow-y-auto">
         {activeTab === "form" && <GenerateMailForm />}
         {activeTab === "history" && <EmailHistory />}
       </div>
