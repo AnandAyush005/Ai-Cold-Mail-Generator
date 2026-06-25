@@ -8,13 +8,18 @@ async function sendEmail(options) {
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
+        secure: false,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
-        }
+        },
+        tls: {
+            rejectUnauthorized: false
+        },
+        connectionTimeout: 10000,
+        greetingTimeout: 10000,
+        socketTimeout: 10000
     });
-
-    await transporter.verify(); // important for debugging
 
     const mailOptions = {
         from: `"Support" <${process.env.EMAIL_USER}>`,
@@ -24,7 +29,11 @@ async function sendEmail(options) {
         html: `<p>${options.text}</p>`
     };
 
-    return await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
+
+    console.log("Mail sent:", info.messageId);
+
+    return info;
 }
 
 export { sendEmail };
