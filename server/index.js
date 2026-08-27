@@ -18,11 +18,11 @@ app.use("/api/v1/ai", aiRouter);
 // IMPORTANT FIX
 const frontendPath = path.join(process.cwd(), "..", "client", "dist");
 
-app.use(express.static(frontendPath));
+// app.use(express.static(frontendPath));
 
-app.use((req, res) => {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
+// app.use((req, res) => {
+//   res.sendFile(path.join(frontendPath, "index.html"));
+// });
 
 const PORT = process.env.PORT || 8000;
 

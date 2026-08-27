@@ -21,7 +21,7 @@ export function GenerateMailForm() {
       const token = localStorage.getItem("authorization")?.replace("Bearer ","");
 
       const response = await axios.post(
-        `/api/v1/ai/generate-cold-mail`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/v1/ai/generate-cold-mail`,
         data,
         {
           headers: {

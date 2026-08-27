@@ -18,7 +18,7 @@ export function VerifyOtp() {
   const verifyMutation = useMutation({
     mutationFn: async (data) => {
       const response = await axios.post(
-        `/api/v1/auth/verify-otp`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/v1/auth/verify-otp`,
         data
       );
       return response.data;
@@ -40,7 +40,7 @@ export function VerifyOtp() {
   const resendMutation = useMutation({
     mutationFn: async (email) => {
       const response = await axios.post(
-        `/api/v1/auth/resend-otp`,
+        `${import.meta.env.VITE_BACKEND_URI}/api/v1/auth/resend-otp`,
         { email }
       );
 
