@@ -102,7 +102,7 @@ User Profile:
     const aiResponse = await axios.post(
         'https://api.groq.com/openai/v1/chat/completions',
         {
-            model: "openai/gpt-oss-120b",
+            model: "llama-3.3-70b-versatile",
             messages: [
             {
                 role: "user",
@@ -177,8 +177,6 @@ User Profile:
         res.status(500).json({
             message : "Error while generating the cold emails"
         })
-
-        console.log(e)
 
 
     }
